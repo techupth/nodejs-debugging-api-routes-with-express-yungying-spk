@@ -2,18 +2,20 @@ import { Router } from "express";
 import { assignments as assignmentsFromFile } from "../data/assignments.js";
 
 let assignments = [...assignmentsFromFile];
+console.log(assignments);
 
 const assignmentRouter = Router();
 
 // start coding here
-assignmentRouter.get("/assignments", (req, res) => {
+assignmentRouter.get("/", (req, res) => {
   return res.json({
     data: assignments,
   });
 });
 
-assignmentRouter.get("/assignments/:id", (req, res) => {
-  const assignmentId = +req.params.id;
+assignmentRouter.get("/:id", (req, res) => {
+  const assignmentId = Number(req.params.id);
+  console.log(assignmentId);
   const hasFound = assignments.find((assign) => assign.id === assignmentId);
 
   if (!hasFound) {
